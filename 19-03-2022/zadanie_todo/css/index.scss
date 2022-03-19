@@ -7,9 +7,11 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100vh;
+
   .container {
     max-width: 300px;
     width: 100%;
+
     .form {
       margin: 50px 0;
       max-width: 300px;
@@ -45,6 +47,7 @@ body {
 
         .form-info {
           display: none;
+
           &.show-error {
             margin-top: 5px;
             background-color: #ff0000;
@@ -123,5 +126,4 @@ body {
       }
     }
   }
-
 }
