@@ -1,6 +1,8 @@
 @import "./basic";
 
 body {
+  background-color: #303030;
+  color: #fff;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -24,13 +26,15 @@ body {
         .form-input {
           outline: none;
           border: 2px solid #eee;
-          border-radius: 8px;
+          border-radius: 5px;
           font-size: 16px;
           padding: 5px 10px;
           transition: all 0.3s ease-in-out;
 
           &:focus {
-            border-color: #999;
+            border-color: #ffc107;
+            background: transparent;
+            color: #fff;
           }
 
           &.show-error {
@@ -43,7 +47,10 @@ body {
           display: none;
           &.show-error {
             margin-top: 5px;
-            color: #ff0000;
+            background-color: #ff0000;
+            color: #fff;
+            padding: 2px 5px;
+            border-radius: 5px;
             display: block;
           }
         }
@@ -61,7 +68,9 @@ body {
         cursor: pointer;
 
         &:hover {
-          border-color: #999;
+          border-color: #ffc107;
+          background: transparent;
+          color: #fff;
         }
       }
     }
@@ -69,6 +78,7 @@ body {
     .headline-2 {
       width: 100%;
       text-align: left;
+      color: #ffc107;
     }
 
     .tasks {
@@ -89,7 +99,7 @@ body {
         }
 
         .check-box {
-          border: 2px solid #eee;
+          border: 2px solid #ffc107;
           transition: all 0.3s ease-in-out;
           width: 20px;
           height: 20px;
@@ -98,7 +108,7 @@ body {
           cursor: pointer;
 
           &:hover {
-            border-color: #999;
+            background-color: #ffc107;
           }
 
           &.checked {
