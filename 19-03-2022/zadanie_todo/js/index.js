@@ -64,7 +64,8 @@ const initTasks = () => {
 }
 
 const formAction = () => {
-    document.querySelector('.form-button').addEventListener('click', () => {
+    document.querySelector('#todoForm').addEventListener('submit', (e) => {
+        e.preventDefault();
         const input = document.querySelector('#taskName');
         const inputInfo = document.querySelector(`#${input.id}Info`);
 
