@@ -59,13 +59,10 @@ const formAction = () => {
         const html = `<div class="task" id="task${itemIndex}">
                 <span class="check-box" data-check="task${itemIndex}"></span>
                 <p class="task-text">${newTask.name}</p>
-                <span class="material-icons-outlined delete delete-task" data-delete="task${itemIndex}">
-remove
-</span>
+                <span class="material-icons-outlined delete delete-task" data-delete="task${itemIndex}">remove</span>
             </div>`;
 
         document.querySelector('.tasks').innerHTML += html;
-        // addEvents();
         input.value = null;
     });
 }
