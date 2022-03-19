@@ -1,1 +1,114 @@
-@import"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap";*{box-sizing:border-box;margin:0;padding:0}body,input{font-family:"Montserrat",sans-serif}body{background-color:#303030;color:#fff;display:flex;align-items:center;flex-direction:column;height:100vh}body .container{max-width:300px;width:100%}body .container .form{margin:50px 0;max-width:300px}body .container .form .form-group{display:flex;flex-direction:column;margin-bottom:15px}body .container .form .form-group .form-label{margin-bottom:10px}body .container .form .form-group .form-input{outline:none;border:2px solid #eee;border-radius:5px;font-size:16px;padding:5px 10px;transition:all .3s ease-in-out}body .container .form .form-group .form-input:focus{border-color:#ffc107;background:transparent;color:#fff}body .container .form .form-group .form-input.show-error{border-color:red;color:red}body .container .form .form-group .form-info{display:none}body .container .form .form-group .form-info.show-error{margin-top:5px;background-color:red;color:#fff;padding:2px 5px;border-radius:5px;display:block}body .container .form .form-button{outline:none;border:2px solid #eee;border-radius:8px;font-size:16px;padding:5px 10px;transition:all .3s ease-in-out;margin-left:auto;display:block;cursor:pointer}body .container .form .form-button:hover{border-color:#ffc107;background:transparent;color:#fff}body .container .headline-2{width:100%;text-align:left;color:#ffc107}body .container .tasks .task{display:flex;align-items:center;justify-content:space-between;margin:5px 0}body .container .tasks .task.deleted{display:none}body .container .tasks .task .task-text.checked{text-decoration:line-through}body .container .tasks .task .check-box{border:2px solid #ffc107;transition:all .3s ease-in-out;width:20px;height:20px;border-radius:5px;margin-right:5px;cursor:pointer}body .container .tasks .task .check-box:hover{background-color:#ffc107}body .container .tasks .task .check-box.checked{display:none}body .container .tasks .task .delete{color:red;cursor:pointer}
+@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body,
+input {
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background-color: #303030;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+body .container {
+  max-width: 300px;
+  width: 100%;
+}
+body .container .form {
+  margin: 50px 0;
+  max-width: 300px;
+}
+body .container .form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+body .container .form .form-group .form-label {
+  margin-bottom: 10px;
+}
+body .container .form .form-group .form-input {
+  outline: none;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: all 0.3s ease-in-out;
+}
+body .container .form .form-group .form-input:focus {
+  border-color: #ffc107;
+  background: transparent;
+  color: #fff;
+}
+body .container .form .form-group .form-input.show-error {
+  border-color: red;
+  color: red;
+}
+body .container .form .form-group .form-info {
+  display: none;
+}
+body .container .form .form-group .form-info.show-error {
+  margin-top: 5px;
+  background-color: red;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 5px;
+  display: block;
+}
+body .container .form .form-button {
+  outline: none;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: all 0.3s ease-in-out;
+  margin-left: auto;
+  display: block;
+  cursor: pointer;
+}
+body .container .form .form-button:hover {
+  border-color: #ffc107;
+  background: transparent;
+  color: #fff;
+}
+body .container .headline-2 {
+  width: 100%;
+  text-align: left;
+  color: #ffc107;
+}
+body .container .tasks .task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+body .container .tasks .task.deleted {
+  display: none;
+}
+body .container .tasks .task .task-text.checked {
+  text-decoration: line-through;
+}
+body .container .tasks .task .check-box {
+  border: 2px solid #ffc107;
+  transition: all 0.3s ease-in-out;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+body .container .tasks .task .check-box:hover {
+  background-color: #ffc107;
+}
+body .container .tasks .task .check-box.checked {
+  display: none;
+}
+body .container .tasks .task .delete {
+  color: red;
+  cursor: pointer;
+}
