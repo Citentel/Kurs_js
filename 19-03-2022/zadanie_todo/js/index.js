@@ -10,40 +10,6 @@ const setTasks = (tasks) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-const addEvents = () => {
-    let taskCheck = document.querySelectorAll('.check-box');
-
-    if (taskCheck.length > 0) {
-        taskCheck.forEach(el => {
-            el.addEventListener('click', (e) => {
-                const task = e.currentTarget.dataset.check;
-                const tasks = JSON.parse(localStorage.getItem('tasks'));
-                tasks[task].isChecked = true;
-                setTasks(tasks);
-
-                document.querySelector(`#${task} .task-text`).classList.add('checked');
-                e.currentTarget.classList.add('checked');
-            });
-        });
-    }
-
-    let taskDelete = document.querySelectorAll('.delete-task');
-
-    if (taskDelete.length > 0) {
-        taskDelete.forEach(el => {
-            el.addEventListener('click', (e) => {
-                const task = e.currentTarget.dataset.delete;
-                const tasks = JSON.parse(localStorage.getItem('tasks'));
-
-                tasks[task].isDeleted = true;
-                setTasks(tasks);
-
-                document.querySelector(`#${task}`).classList.add('deleted');
-            });
-        });
-    }
-}
-
 const initTasks = () => {
     const tasks = getTasks();
 
@@ -99,12 +65,35 @@ remove
             </div>`;
 
         document.querySelector('.tasks').innerHTML += html;
-        addEvents();
+        // addEvents();
         input.value = null;
     });
+}
+
+const taskClickHandler = () => {
+    document.querySelector('.tasks').addEventListener('click', (e) => {
+        console.log();
+        if (e.target.dataset.check !== undefined) {
+            const task = e.target.dataset.check;
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            tasks[task].isChecked = true;
+            setTasks(tasks);
+
+            document.querySelector(`#${task} .task-text`).classList.toggle('checked');
+            e.target.classList.toggle('checked');
+        } else if (e.target.dataset.delete !== undefined) {
+            const task = e.target.dataset.delete;
+            const tasks = getTasks();
+
+            tasks[task].isDeleted = true;
+            setTasks(tasks);
+
+            document.querySelector(`#${task}`).classList.toggle('deleted');
+        }
+    })
 }
 
 
 formAction();
 initTasks();
-addEvents();
+taskClickHandler();
