@@ -100,6 +100,7 @@ remove
 
         document.querySelector('.tasks').innerHTML += html;
         addEvents();
+        input.value = null;
     });
 }
 
