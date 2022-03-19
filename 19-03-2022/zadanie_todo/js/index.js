@@ -1,4 +1,4 @@
-if (!localStorage.getItem('tasks')) {
+if (localStorage.getItem('tasks') === null) {
     localStorage.setItem('tasks', JSON.stringify({}));
 }
 
