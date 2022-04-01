@@ -1,0 +1,18 @@
+@use 'fonts'
+@use 'colors'
+
+*
+  &,
+  &:before,
+  &:after
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+body, input, select, option, textarea, button
+  font-family: fonts.$font-stack
+  font-size: 16px
+
+body
+  background-color: colors.$primary
+  color: colors.$white
