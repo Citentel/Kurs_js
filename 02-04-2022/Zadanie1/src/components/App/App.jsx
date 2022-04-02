@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Swal from 'sweetalert2';
 
 import {
   getElements, addElement, removeElement, updateElement,
 } from '../DataBase/DataBase';
 import TodoList from '../TodoList/TodoList.jsx';
+import Alert from '../Alert/Alert';
 
 import styles from './App.module.css';
 
@@ -19,14 +19,11 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setTodos(data);
+        Alert('success', 'Loaded data');
       })
       .catch((error) => {
-        Swal.fire({
-          title: 'Error!',
-          text: error.message,
-          icon: 'error',
-        });
         setTodos([]);
+        return Alert('error', error.message ?? 'Something went wrong');
       });
   }, []);
 
@@ -45,6 +42,7 @@ const App = () => {
     // walidacja
     if (inputValue.length < 2) {
       setIsErrorMessage(true);
+      Alert('error', 'Field must contain at least 2 characters');
       return;
     }
 
@@ -61,14 +59,9 @@ const App = () => {
           ...todos,
           data,
         ]);
+        Alert('success', 'Element added successfully');
       })
-      .catch((error) => {
-        Swal.fire({
-          title: 'Error!',
-          text: error.message,
-          icon: 'error',
-        });
-      });
+      .catch((error) => Alert('error', error.message ?? 'Something went wrong'));
 
     setInputValue('');
   };
@@ -83,14 +76,9 @@ const App = () => {
     updateElement(id, JSON.stringify(changedTodos[indexOfChangedElement]))
       .then(() => {
         saveTodos(changedTodos);
+        Alert('success', 'Element changed successfully');
       })
-      .catch((error) => {
-        Swal.fire({
-          title: 'Error!',
-          text: error.message,
-          icon: 'error',
-        });
-      });
+      .catch((error) => Alert('error', error.message ?? 'Something went wrong'));
   };
 
   const handleRemove = (id) => {
@@ -98,14 +86,9 @@ const App = () => {
       .then(() => {
         const filteredTodos = todos.filter((todo) => todo.id !== id);
         setTodos(filteredTodos);
+        Alert('success', 'Element removed successfully');
       })
-      .catch((error) => {
-        Swal.fire({
-          title: 'Error!',
-          text: error.message,
-          icon: 'error',
-        });
-      });
+      .catch((error) => Alert('error', error.message ?? 'Something went wrong'));
   };
 
   return (<div>
