@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { onValue, ref, set } from 'firebase/database';
-import database from '../../firebase';
-import Chat from '../Chat/Chat';
+import { observe, save } from 'services/firebase';
+import Chat from 'components/sections/chat/Chat';
+import ChatForm from 'components/sections/chatForm/ChatForm';
 import styles from './App.module.css';
 
 function App() {
@@ -12,13 +12,7 @@ function App() {
   const [chatData, setChatData] = useState([]);
 
   useEffect(() => {
-    onValue(ref(database, '/'), (snapshot) => {
-      const data = snapshot.val();
-      if (!data) {
-        setChatData([]);
-      }
-      setChatData(Object.values(data));
-    });
+    observe('/', setChatData);
   }, []);
 
   const inputChangeHandler = (event) => {
@@ -59,7 +53,7 @@ function App() {
 
       const actualChatData = [...chatData, newMessage];
 
-      set(ref(database, `/${newMessage.id}`), newMessage);
+      save('/', newMessage);
 
       setChatData(actualChatData);
       setMessageValue(null);
@@ -79,43 +73,15 @@ function App() {
       <main className={styles.containerMain}>
         <h1 className={styles.headline1}>Chat</h1>
         <Chat chat={chatData} />
-        <form
-          id="form-chat"
-          className={styles.form}
-          onSubmit={formSubmitHandler}
-        >
-          <label htmlFor="person" className={styles.formGroup}>
-            <p className={styles.formLabel}>Person</p>
-            <input
-              type="text"
-              id="person"
-              name="person"
-              className={styles.formInput}
-              onChange={inputChangeHandler}
-              value={personValue ?? ''}
-            />
-            {personError ? (
-              <p className={styles.formError}>Field can not be empty</p>
-            ) : null}
-          </label>
-          <label htmlFor="message" className={styles.formGroup}>
-            <p className={styles.formLabel}>Message</p>
-            <textarea
-              rows={5}
-              id="message"
-              name="message"
-              className={styles.formInput}
-              onChange={inputChangeHandler}
-              value={messageValue ?? ''}
-            />
-            {messageError ? (
-              <p className={styles.formError}>Field can not be empty</p>
-            ) : null}
-          </label>
-          <button label="submit" type="submit" className={styles.formSubmit}>
-            Send Message
-          </button>
-        </form>
+        <ChatForm
+          formSubmit={formSubmitHandler}
+          personChange={inputChangeHandler}
+          personValue={personValue}
+          personError={personError}
+          messageChange={inputChangeHandler}
+          messageValue={messageValue}
+          messageError={messageError}
+        />
       </main>
     </div>
   );

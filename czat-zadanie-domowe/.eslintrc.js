@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    'react/button-has-type': 0,
     'prettier/prettier': [
       'error',
       {
@@ -25,5 +26,12 @@ module.exports = {
         extensions: ['.js', '.jsx'],
       },
     ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
   },
 };

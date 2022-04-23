@@ -1,0 +1,33 @@
+@import "../../../assets/css/colors"
+
+.formGroup
+  display: block
+  margin-bottom: 10px
+
+  .formLabel
+    margin-bottom: 3px
+    color: $dark
+
+  .formInput
+    display: block
+    width: 100%
+    outline: none
+    border-radius: 5px
+    border: 2px solid $primary
+    color: $dark
+    transition: all 0.3s ease-in-out
+    padding: 8px 10px
+
+    &:focus
+      color: $dark
+      border-color: $warning
+      background-color: $white
+
+  .formError
+    display: block
+    color: $white
+    background-color: $danger
+    border-radius: 5px
+    padding: 5px 10px
+    font-size: 12px
+    margin-top: 5px
