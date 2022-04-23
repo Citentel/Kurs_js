@@ -1,0 +1,41 @@
+@import "../../../assets/css/colors"
+
+.wrapper
+  max-width: 800px
+  width: 100%
+  margin: 0 auto
+  display: flex
+  flex-direction: column
+  gap: 50px
+  .header
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: 10px 15px
+    background-color: $dark
+    color: $light
+    border-radius: 0 0 10px 10px
+    .title
+      font-weight: 600
+      color: $warning
+      font-size: 22px
+
+    .nav
+      display: flex
+      gap: 10px
+      .link
+        text-decoration: none
+        color: $light
+        transition: .3s all ease-in-out
+
+        &:hover
+          color: $warning
+
+  .content
+    min-height: 80vh
+  .footer
+    padding: 10px 15px
+    background-color: $dark
+    border-radius: 10px 10px 0 0
+    text-align: center
+    color: $light

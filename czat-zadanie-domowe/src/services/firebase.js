@@ -1,5 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, set } from 'firebase/database';
+import {
+  getDatabase,
+  onValue,
+  ref,
+  set,
+  get as FBget,
+} from 'firebase/database';
 // Import the functions you need from the SDKs you need
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,11 +37,13 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 const observe = (url, callback) =>
-  onValue(ref(database, url), (snapshot) => {
+  onValue(ref(database, `${url}/`), (snapshot) => {
     const data = snapshot.val();
     callback(data ? Object.values(data) : []);
   });
 
-const save = (url, data) => set(ref(database, `${url}${data.id}`), data);
+const save = (url, data) => set(ref(database, `${url}/${data.id}`), data);
+const update = (url, data) => set(ref(database, url), data);
+const get = (url) => FBget(ref(database, url)).then((data) => data.val());
 
-export { observe, save, database };
+export { observe, get, update, save, database };

@@ -38,7 +38,7 @@ InputGroup.defaultProps = {
   name: null,
   id: null,
   label: null,
-  value: null,
+  value: '',
   onChange: null,
   error: false,
   rows: 3,

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/style.css';
-import App from 'components/pages/app/App';
 import 'material-icons/iconfont/material-icons.css';
+import Router from './Router';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router />
   </React.StrictMode>,
   document.querySelector('#root')
 );

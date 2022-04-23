@@ -1,33 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { observe, save } from 'services/firebase';
+import { observe, get, save } from 'services/firebase';
 import Chat from 'components/sections/chat/Chat';
 import ChatForm from 'components/sections/chatForm/ChatForm';
+import MainLayout from 'components/layouts/mainLayout/MainLayout';
 import styles from './App.module.css';
 
 function App() {
-  const [personValue, setPersonValue] = useState(null);
-  const [messageValue, setMessageValue] = useState(null);
+  const [personValue, setPersonValue] = useState('');
+  const [messageValue, setMessageValue] = useState('');
   const [personError, setPersonError] = useState(false);
   const [messageError, setMessageError] = useState(false);
   const [chatData, setChatData] = useState([]);
 
   useEffect(() => {
-    observe('/', setChatData);
+    observe('messages', setChatData);
+    get('currentUser').then((user) => {
+      setPersonValue(user.name);
+    });
   }, []);
 
   const inputChangeHandler = (event) => {
     const key = event.currentTarget.getAttribute('name');
     const data = event.currentTarget.value;
 
-    if (key === 'person') {
-      if (data !== null && data.length === 0) {
-        setPersonError(true);
-      } else {
-        setPersonError(false);
-      }
-      setPersonValue(data);
-    } else if (key === 'message') {
-      if (data !== null && data.length === 0) {
+    if (key === 'message') {
+      if (data === '' || data.length === 0) {
         setMessageError(true);
       } else {
         setMessageError(false);
@@ -40,9 +37,9 @@ function App() {
     event.preventDefault();
 
     if (
-      personValue !== null &&
+      personValue !== '' &&
       personValue.length !== 0 &&
-      messageValue !== null &&
+      messageValue !== '' &&
       messageValue.length !== 0
     ) {
       const newMessage = {
@@ -53,37 +50,35 @@ function App() {
 
       const actualChatData = [...chatData, newMessage];
 
-      save('/', newMessage);
+      save('messages', newMessage);
 
       setChatData(actualChatData);
-      setMessageValue(null);
+      setMessageValue('');
     } else {
-      if (personValue === null || personValue.length === 0) {
+      if (personValue === '' || personValue.length === 0) {
         setPersonError(true);
       }
 
-      if (messageValue === null || messageValue.length === 0) {
+      if (messageValue === '' || messageValue.length === 0) {
         setMessageError(true);
       }
     }
   };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.containerMain}>
-        <h1 className={styles.headline1}>Chat</h1>
-        <Chat chat={chatData} />
-        <ChatForm
-          formSubmit={formSubmitHandler}
-          personChange={inputChangeHandler}
-          personValue={personValue}
-          personError={personError}
-          messageChange={inputChangeHandler}
-          messageValue={messageValue}
-          messageError={messageError}
-        />
-      </main>
-    </div>
+    <MainLayout>
+      <h1 className={styles.headline1}>Chat</h1>
+      <Chat chat={chatData} />
+      <ChatForm
+        formSubmit={formSubmitHandler}
+        personChange={inputChangeHandler}
+        personValue={personValue}
+        personError={personError}
+        messageChange={inputChangeHandler}
+        messageValue={messageValue}
+        messageError={messageError}
+      />
+    </MainLayout>
   );
 }
 
