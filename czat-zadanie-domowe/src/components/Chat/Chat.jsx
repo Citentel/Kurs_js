@@ -5,9 +5,7 @@ import personImg from './person.svg';
 import arrow from './arrow.svg';
 
 function Chat({ chat }) {
-  const [chatData, setChatData] = useState(
-    JSON.parse(localStorage.getItem('chatData')) ?? []
-  );
+  const [chatData, setChatData] = useState([]);
 
   const messagesEndRef = useRef(null);
 

@@ -16,12 +16,11 @@ const App = () => {
 
   useEffect(() => {
     getElements()
-      .then((response) => response.json())
-      .then((data) => {
-        setTodos(data);
-        Alert('success', 'Loaded data');
+      .then((response) => {
+        console.log(response.json());
       })
       .catch((error) => {
+        console.log(error);
         setTodos([]);
         return Alert('error', error.message ?? 'Something went wrong');
       });

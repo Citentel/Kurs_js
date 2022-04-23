@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx prettier --write .",
-    "dev": "parcel ./src/index.html -p 3000"
+    "dev": "parcel ./src/index.html -p 3001"
   },
   "author": "",
   "license": "ISC",

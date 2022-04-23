@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { onValue, ref, set } from 'firebase/database';
+import database from '../../firebase';
 import Chat from '../Chat/Chat';
 import styles from './App.module.css';
 
@@ -7,9 +9,17 @@ function App() {
   const [messageValue, setMessageValue] = useState(null);
   const [personError, setPersonError] = useState(false);
   const [messageError, setMessageError] = useState(false);
-  const [chatData, setChatData] = useState(
-    JSON.parse(localStorage.getItem('chatData')) ?? []
-  );
+  const [chatData, setChatData] = useState([]);
+
+  useEffect(() => {
+    onValue(ref(database, '/'), (snapshot) => {
+      const data = snapshot.val();
+      if (!data) {
+        setChatData([]);
+      }
+      setChatData(Object.values(data));
+    });
+  }, []);
 
   const inputChangeHandler = (event) => {
     const key = event.currentTarget.getAttribute('name');
@@ -41,17 +51,16 @@ function App() {
       messageValue !== null &&
       messageValue.length !== 0
     ) {
-      const index = chatData.length;
-      const actualChatData = [
-        ...chatData,
-        {
-          id: index,
-          person: personValue,
-          message: messageValue,
-        },
-      ];
+      const newMessage = {
+        id: Date.now(),
+        person: personValue,
+        message: messageValue,
+      };
 
-      localStorage.setItem('chatData', JSON.stringify(actualChatData));
+      const actualChatData = [...chatData, newMessage];
+
+      set(ref(database, `/${newMessage.id}`), newMessage);
+
       setChatData(actualChatData);
       setMessageValue(null);
     } else {
