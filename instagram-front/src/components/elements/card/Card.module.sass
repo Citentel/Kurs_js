@@ -1,0 +1,74 @@
+.card
+  background-color: #ffffff
+  border: 1px solid rgba(38, 38, 38, .2)
+  margin-bottom: 20px
+
+  .cardHeader
+    padding: 15px
+
+    .link
+      display: flex
+      align-items: center
+      transition: .2s all ease-in-out
+      width: fit-content
+
+      &:hover
+        color: rgb(33, 150, 243)
+
+      img
+        border-radius: 50%
+        border: 1px solid rgba(38, 38, 38, .2)
+        margin-right: 15px
+
+      p
+        font-weight: 500
+
+  .cardBody
+    .image
+      width: 100%
+      height: auto
+
+  .cardFooter
+    padding: 15px
+
+    .icons
+      display: flex
+      justify-content: space-between
+      font-size: 24px
+      padding-bottom: 15px
+
+      svg
+        cursor: pointer
+        transition: .2s all ease-in-out
+
+        &:first-child
+          &:hover
+            color: rgb(255, 0, 0)
+
+        &:hover
+          color: rgb(33, 150, 243)
+
+        &:not(&:last-child)
+          margin-right: 20px
+
+    .content
+      .likes
+        font-weight: 500
+        margin-bottom: 5px
+
+      .message
+        margin-bottom: 5px
+
+      .comment
+        color: rgba(38, 38, 38, .4)
+        cursor: pointer
+        transition: .2s all ease-in-out
+        width: fit-content
+        margin-bottom: 5px
+
+        &:hover
+          color: rgb(33, 150, 243)
+
+      .date
+        font-size: 12px
+        color: rgba(38, 38, 38, .4)

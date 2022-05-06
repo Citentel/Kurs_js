@@ -1,0 +1,23 @@
+@use 'fonts'
+@use 'colors'
+@use 'normalize'
+
+*
+  &,
+  &:before,
+  &:after
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+body, input, select, option, textarea, button
+  font-family: fonts.$font-stack
+  font-size: 14px
+
+body
+  background-color: rgba(38, 38, 38, .03)
+  color: colors.$dark
+
+a
+  color: initial
+  text-decoration: none

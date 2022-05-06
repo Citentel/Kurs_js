@@ -1,0 +1,42 @@
+.content
+  width: 100%
+  display: flex
+  justify-content: space-between
+  margin-top: 20px
+
+  .main
+    max-width: 614px
+    width: 100%
+
+  .sidebar
+    max-width: 300px
+    width: 100%
+
+    .profile
+      display: flex
+      align-items: center
+      margin-bottom: 100px
+      width: fit-content
+
+      .image
+        border-radius: 50%
+        border: 1px solid rgba(38, 38, 38, .2)
+        margin-right: 15px
+
+      .info
+        .nickname
+          transition: .2s all ease-in-out
+
+        .fullName
+          color: rgba(38, 38, 38, .3)
+
+      &:hover
+        .info
+          .nickname
+            color: rgb(33, 150, 243)
+
+    .footer
+      color: rgba(38, 38, 38, .2)
+
+    @media only screen and (max-width: 1000px)
+      display: none

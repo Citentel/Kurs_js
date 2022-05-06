@@ -1,0 +1,48 @@
+.sideNav
+  height: 100%
+  width: 250px
+  position: fixed
+  z-index: 1
+  top: 59px
+  right: -250px
+  background-color: #ffffff
+  border-left: 1px solid rgba(38, 38, 38, .2)
+  overflow-x: hidden
+  padding: 20px
+  transition: 0.5s
+
+  .closeBtn
+    border: 0
+    outline: 0
+    font-size: 32px
+    background-color: transparent
+    transition: .2s all ease-in-out
+    cursor: pointer
+    display: block
+    margin-left: auto
+    color: #ff0000
+    margin-bottom: 20px
+
+    &:hover
+      color: rgb(33, 150, 243)
+
+  .links
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    a
+      font-size: 24px
+      transition: .2s all ease-in-out
+      border-left: 3px solid transparent
+
+      &:not(&:last-child)
+        margin-bottom: 15px
+
+      &:hover
+        color: rgb(33, 150, 243)
+        border-left-color: rgb(33, 150, 243)
+        padding-left: 10px
+
+.sideNavActive
+  right: 0
