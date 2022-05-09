@@ -8,6 +8,7 @@ import Register from 'components/pages/register/Register';
 import Logout from 'components/pages/logout/Logout';
 import ResetCode from 'components/pages/resetCode/ResetCode';
 import ResetPassword from 'components/pages/resetPassword/ResetPassword';
+import Profile from './components/pages/profile/Profile';
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<App />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset-code" element={<ResetCode />} />

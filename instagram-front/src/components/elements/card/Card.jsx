@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
 import styles from './Card.module.sass';
+import Image from '../image/Image';
 
 function Card() {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
         <Link to="/profile" className={styles.link}>
-          <img src="https://placekitten.com/32" alt="user profile" />
+          <Image
+            className={styles.image}
+            fileName="32.jpeg"
+            alt="user profile"
+          />
           <p>nazwa usera</p>
         </Link>
       </div>
       <div className={styles.cardBody}>
-        <img
-          src="https://placekitten.com/614"
-          alt="cat"
-          className={styles.image}
-        />
+        <Image fileName="614.jpeg" alt="cat" />
       </div>
       <div className={styles.cardFooter}>
         <div className={styles.icons}>

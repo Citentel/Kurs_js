@@ -14,7 +14,9 @@ function Menu({ menuActive, setMenuActive, handleClickMenu, children }) {
           setMenuActive(false);
         }
       } else if (event.target.tagName === 'A') {
-        setMenuActive(false);
+        setTimeout(() => {
+          setMenuActive(false);
+        }, 50);
       }
     };
 

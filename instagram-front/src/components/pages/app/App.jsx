@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopyright } from '@fortawesome/free-regular-svg-icons';
 import styles from './App.module.sass';
+import Image from '../../elements/image/Image';
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
       </section>
       <section className={styles.sidebar}>
         <Link to="/profile" className={styles.profile}>
-          <img
+          <Image
             className={styles.image}
-            src="https://placekitten.com/56"
+            fileName="56.jpeg"
             alt="user profile"
           />
           <div className={styles.info}>
