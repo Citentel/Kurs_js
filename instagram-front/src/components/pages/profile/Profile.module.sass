@@ -1,2 +1,67 @@
 .container
+  .header
+    width: 100%
+    display: flex
+    justify-content: space-between
+    padding: 30px 0
+    margin-bottom: 30px
+    border-bottom: 1px solid rgba(38, 38, 38, .2)
 
+    .image
+      max-width: 300px
+      width: 100%
+      display: flex
+      justify-content: center
+      margin-right: 30px
+
+      img
+        max-width: 150px
+        width: 100%
+        border-radius: 50%
+
+    .content
+      width: 100%
+
+      .nickname
+        font-size: 26px
+        margin-bottom: 20px
+
+      .information
+        font-size: 16px
+        display: flex
+
+        & > *
+          &:not(:last-child)
+            margin-right: 40px
+
+  @media only screen and (max-width: 600px)
+    .header
+      flex-direction: column
+      align-items: center
+
+      .image
+        margin: 0 0 20px 0
+
+      .content
+        text-align: center
+
+        .information
+          justify-content: center
+
+  @media only screen and (max-width: 400px)
+    .header
+      .content
+        .information
+          flex-direction: column
+
+          & > *
+            &:not(:last-child)
+              margin: 0 0 10px 0 !important
+
+  .posts
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: space-between
+    @media only screen and (max-width: 1000px)
+      justify-content: center

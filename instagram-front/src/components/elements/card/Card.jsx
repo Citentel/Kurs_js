@@ -2,22 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons';
+import PropTypes from 'prop-types';
 import styles from './Card.module.sass';
 import Image from '../image/Image';
 
-function Card() {
+function Card({ showHeader }) {
   return (
     <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <Link to="/profile" className={styles.link}>
-          <Image
-            className={styles.image}
-            fileName="32.jpeg"
-            alt="user profile"
-          />
-          <p>nazwa usera</p>
-        </Link>
-      </div>
+      {showHeader ? (
+        <div className={styles.cardHeader}>
+          <Link to="/profile" className={styles.link}>
+            <Image
+              className={styles.image}
+              fileName="32.jpeg"
+              alt="user profile"
+            />
+            <p>nazwa usera</p>
+          </Link>
+        </div>
+      ) : null}
       <div className={styles.cardBody}>
         <Image fileName="614.jpeg" alt="cat" />
       </div>
@@ -38,5 +41,13 @@ function Card() {
     </div>
   );
 }
+
+Card.defaultProps = {
+  showHeader: true,
+};
+
+Card.propTypes = {
+  showHeader: PropTypes.bool,
+};
 
 export default Card;
