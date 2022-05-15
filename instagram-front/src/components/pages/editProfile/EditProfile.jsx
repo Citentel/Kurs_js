@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Form from 'components/sections/form/Form';
-import FormLink from 'components/sections/formLink/FormLink';
-import { loginUser } from 'services/firebase';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { PublicRoute } from 'utils/AuthorizationRoutes';
-import styles from './Login.module.sass';
+import { useNavigate } from 'react-router-dom';
+import { RestrictedRoute } from 'utils/AuthorizationRoutes';
+import { updateUser } from 'services/firebase';
+import { MainContext } from 'contexts/main';
+import styles from './EditProfile.module.sass';
 
-function Login() {
+function EditProfile() {
+  const { currentUser } = useContext(MainContext);
   const [valueInput, setValueInput] = useState({
-    email: '',
-    password: '',
+    nickname: currentUser ? currentUser.displayName : '',
+    urlImage: currentUser ? currentUser.photoURL : '',
   });
   const [errorInput, setErrorInput] = useState({
-    email: null,
-    password: null,
+    nickname: null,
+    urlImage: null,
   });
   const [inputs, setInputs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setInputs(['email', 'password']);
+    setInputs(['nickname', 'urlImage']);
   }, []);
+
+  useEffect(() => {
+    setValueInput({
+      nickname: currentUser ? currentUser.displayName : '',
+      urlImage: currentUser ? currentUser.photoURL : '',
+    });
+  }, [currentUser]);
 
   const handleInputChange = (e) => {
     const element = e.currentTarget;
@@ -55,13 +63,26 @@ function Login() {
     });
 
     if (isValid === inputs.length) {
-      loginUser(valueInput.email, valueInput.password)
+      updateUser(currentUser, valueInput.nickname, valueInput.urlImage)
         .then(() => {
-          navigate('/dashboard');
+          Swal.fire({
+            title: 'Success!',
+            text: 'Profile successfully updated',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+          }).then(() => {
+            navigate('/profile');
+          });
         })
         .catch((error) => {
           Swal.fire({
-            title: `Error!`,
+            title: 'Error!',
             text: error.message,
             icon: 'error',
             showConfirmButton: false,
@@ -88,7 +109,7 @@ function Login() {
   };
 
   return (
-    <PublicRoute>
+    <RestrictedRoute>
       <div className={styles.container}>
         <Form
           fields={inputs.map((input) => ({
@@ -101,27 +122,13 @@ function Login() {
           }))}
           button={{
             type: 'submit',
-            value: 'Log in',
+            value: 'Change user',
           }}
           handleSubmit={handleSubmit}
         />
-        <FormLink
-          links={[
-            {
-              text: 'No account?',
-              href: 'register',
-              link: 'Sing up',
-            },
-            {
-              text: 'Forgot password?',
-              href: 'reset-code',
-              link: 'Change it',
-            },
-          ]}
-        />
       </div>
-    </PublicRoute>
+    </RestrictedRoute>
   );
 }
 
-export default Login;
+export default EditProfile;
