@@ -1,15 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Menu from 'components/elements/menu/Menu';
 import Navbar from 'components/elements/navbar/Navbar';
-import { singOutUser } from 'services/firebase';
+import { observe, singOutUser } from 'services/firebase';
 import { MainContext } from 'contexts/main';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './MainLayout.module.sass';
 
 function MainComponent() {
   const [menuActive, setMenuActive] = useState(false);
   const navigate = useNavigate(null);
   const { currentUser } = useContext(MainContext);
+
+  useEffect(() => {
+    observe('notifications', (notification) => {
+      toast(notification.recipient);
+    });
+  });
 
   const handleClickMenu = () => {
     setMenuActive(!menuActive);
@@ -33,6 +41,7 @@ function MainComponent() {
             <>
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/profile">My profile</Link>
+              <Link to="/create">Create post</Link>
               <button
                 onClick={() => {
                   singOutUser().then(() => {
@@ -52,6 +61,17 @@ function MainComponent() {
         </Menu>
         <Outlet />
       </main>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

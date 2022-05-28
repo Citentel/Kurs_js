@@ -11,7 +11,7 @@ function Form({ fields, button, handleSubmit }) {
         <Input
           key={element.id}
           handleInputChange={element.handleChange}
-          value={element.value}
+          value={element.type === 'file' ? undefined : element.value}
           type={element.type}
           id={element.id}
           error={element.error}

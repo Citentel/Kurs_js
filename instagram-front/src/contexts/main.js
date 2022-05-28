@@ -9,12 +9,16 @@ export const MainContext = React.createContext({
 
 export function MainContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setCurrentUser(user);
     }
+    setIsLoading(false);
   });
+
+  if (isLoading) return null;
   return (
     <MainContext.Provider
       /* eslint-disable-next-line react/jsx-no-constructed-context-values */

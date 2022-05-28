@@ -11,6 +11,7 @@ import ResetPassword from 'components/pages/resetPassword/ResetPassword';
 import Profile from 'components/pages/profile/Profile';
 import EditProfile from 'components/pages/editProfile/EditProfile';
 import { MainContextProvider } from 'contexts/main';
+import AddPost from './components/pages/addPost/AddPost';
 
 function Router() {
   return (
@@ -25,7 +26,8 @@ function Router() {
             <Route path="/register" element={<Register />} />
             <Route path="/reset-code" element={<ResetCode />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/edit-profilie" element={<EditProfile />} />
+            <Route path="/create" element={<AddPost />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

@@ -13,6 +13,13 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage';
 // Import the functions you need from the SDKs you need
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -69,3 +76,13 @@ export const updateUser = (user, name, photo) =>
     displayName: name,
     photoURL: photo,
   });
+
+const storage = getStorage();
+
+export const addFileToStorage = (file) => {
+  const fileDestination = storageRef(storage, `files/${file.name}`);
+
+  return uploadBytes(fileDestination, file).then(() =>
+    getDownloadURL(fileDestination)
+  );
+};
